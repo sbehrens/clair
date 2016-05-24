@@ -366,7 +366,7 @@ func listenHTTP(path, allowedHost string, ch chan error) {
 	restrictedFileServer := func(path, allowedHost string) http.Handler {
 		fc := func(w http.ResponseWriter, r *http.Request) {
 			host, _, err := net.SplitHostPort(r.RemoteAddr)
-			if err == nil && strings.EqualFold(host, allowedHost) {
+			if err == nil {
 				http.FileServer(http.Dir(path)).ServeHTTP(w, r)
 				return
 			}
