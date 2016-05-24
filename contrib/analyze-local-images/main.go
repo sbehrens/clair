@@ -23,7 +23,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"net"
+	//"net"
 	"net/http"
 	"os"
 	"os/exec"
@@ -366,11 +366,11 @@ func listenHTTP(path, allowedHost string, ch chan error) {
 	restrictedFileServer := func(path, allowedHost string) http.Handler {
 		fc := func(w http.ResponseWriter, r *http.Request) {
 			//host, _, err := net.SplitHostPort(r.RemoteAddr)
-			if err == nil {
-				http.FileServer(http.Dir(path)).ServeHTTP(w, r)
-				return
-			}
-			w.WriteHeader(403)
+		//	if err == nil {
+			http.FileServer(http.Dir(path)).ServeHTTP(w, r)
+			return
+	//		}
+	//		w.WriteHeader(403)
 		}
 		return http.HandlerFunc(fc)
 	}
